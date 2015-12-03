@@ -1,14 +1,11 @@
-package $package$.api
+package $package$.rest.api
 
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.{ExceptionHandler, RejectionHandler}
-import $package$.core.AppException
+import $package$.rest.core._
+import $package$.rest.util.serialization.JsonSupport
 
-/**
- * Implicits.scala
- *
- */
 object Implicits extends JsonSupport {
 
   implicit def rejectionHandler = RejectionHandler.newBuilder()
@@ -21,3 +18,4 @@ object Implicits extends JsonSupport {
     case e: Throwable => complete(StatusCodes.InternalServerError, AppException(e.getMessage))
   }
 }
+

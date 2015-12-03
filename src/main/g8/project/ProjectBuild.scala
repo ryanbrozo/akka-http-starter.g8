@@ -44,7 +44,7 @@ object BuildSettings {
   val APP_VERSION = "0.1"
 
   lazy val commonSettings = Seq(
-    organization        := "com.bengga",
+    organization        := "$organization$",
     scalaVersion        := SCALA_VERSION,
     version             := APP_VERSION
   )
@@ -113,32 +113,25 @@ object ProjectBuild extends Build {
   import BuildSettings._
 
   lazy val main = Project(
-    id = "bengga-analytics",
+    id = "$name$",
     base = file(".")
   )
     .aggregate(core, rest)
     .settings(commonSettings: _*)
 
   lazy val core = Project(
-    id = "bengga-analytics-core",
+    id = "$name$-core",
     base = file("core")
   )
     .settings(commonSettings: _*)
     .settings(coreSettings: _*)
 
   lazy val rest = Project(
-    id = "bengga-analytics-rest",
+    id = "$name$-rest",
     base = file("rest")
   )
     .dependsOn(core % "compile->compile;test->test")
     .settings(commonSettings: _*)
     .settings(restSettings: _*)
 
-  lazy val service = Project(
-    id = "bengga-analytics-service",
-    base = file("service")
-  )
-    .dependsOn(core)
-    .settings(commonSettings: _*)
-    .settings(serviceSettings: _*)
 }
