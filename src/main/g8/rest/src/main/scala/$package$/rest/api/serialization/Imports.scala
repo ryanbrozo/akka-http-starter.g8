@@ -52,7 +52,7 @@ trait SegmentMatchers {
       } match {
         case Success(v) => Matched(Path.Empty, Tuple1(v))
         case Failure(e) =>
-          logger.warn(s"Unable to convert ${path.toString()} to UUID")
+          logger.warn(s"Unable to convert \${path.toString()} to UUID")
           Unmatched
       }
     }

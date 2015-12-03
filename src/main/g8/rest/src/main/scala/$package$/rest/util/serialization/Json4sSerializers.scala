@@ -17,7 +17,7 @@ object Json4sSerializers {
         try {
           s.toDateTime
         } catch {
-          case e: Exception => throw new MappingException(s"Unable to parse $s as a Joda DateTime value", e)
+          case e: Exception => throw new MappingException(s"Unable to parse \$s as a Joda DateTime value", e)
         }
     },
     { case s: DateTime => JString(s.toISO8601String) }

@@ -30,12 +30,12 @@ object Directives {
       def log(ip: String, protoOption: Option[String], portOption: Option[Int], userAgentOption: Option[String],
               xClientVersionOption: Option[String])(request: HttpRequest): Any => Option[LogEntry] = {
         case a: Complete =>
-          val log = s"""$ip${portOption.fold("")(p => s":$p")} ${protoOption.getOrElse("unk")} """ +
-            s"""${request.uri} ${a.response.status.intValue} "${userAgentOption.getOrElse("")}" ${xClientVersionOption.getOrElse("")}"""
+          val log = s"""\$ip\${portOption.fold("")(p => s":\$p")} \${protoOption.getOrElse("unk")} """ +
+            s"""\${request.uri} \${a.response.status.intValue} "\${userAgentOption.getOrElse("")}" \${xClientVersionOption.getOrElse("")}"""
           Some(LogEntry(log, Logging.InfoLevel))
         case a: Rejected =>
-          val log = s"""$ip${portOption.fold("")(p => s":$p")} ${protoOption.getOrElse("unk")} """ +
-            s"""${request.uri} $a "${userAgentOption.getOrElse("")}" ${xClientVersionOption.getOrElse("")}"""
+          val log = s"""\$ip\${portOption.fold("")(p => s":\$p")} \${protoOption.getOrElse("unk")} """ +
+            s"""\${request.uri} \$a "\${userAgentOption.getOrElse("")}" \${xClientVersionOption.getOrElse("")}"""
           Some(LogEntry(log, Logging.InfoLevel))
         case response=>
           Some(LogEntry("a", Logging.InfoLevel))

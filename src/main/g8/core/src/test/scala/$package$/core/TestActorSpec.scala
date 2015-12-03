@@ -3,7 +3,7 @@ package core
 
 import akka.actor._
 import akka.testkit._
-import $package$.core.actors._
+import $package$.core.actors.{TestActor => MyTestActor}
 import $package$.persistence.dummy._
 import org.joda.time.DateTime
 import org.scalatest._
@@ -15,13 +15,13 @@ class TestActorSpec(_system: ActorSystem)
   with Matchers
   with BeforeAndAfterAll {
 
-  import TestActor._
+  import MyTestActor._
   import DummyTestMapper._
   import util.Imports._
 
   def this() = this(ActorSystem("test"))
 
-  val actor = system.actorOf(Props(classOf[TestActor], new DummyTestMapper))
+  val actor = system.actorOf(Props(classOf[MyTestActor], new DummyTestMapper))
 
   override protected def afterAll(): Unit = {
     TestKit.shutdownActorSystem(system)
@@ -29,7 +29,7 @@ class TestActorSpec(_system: ActorSystem)
 
   "TestActor" should "get all top items" in {
 
-    actor ! GetTopFollowers(0, 6)
+    actor ! GetTop(0, 6)
 
     expectMsg(topItems)
   }

@@ -2,7 +2,7 @@ package $package$.persistence
 
 import java.util.UUID
 
-import $package$.domain.models.{BrandFollower, Model}
+import $package$.domain.models.{Test, Model}
 
 /**
   * DataMapper.scala

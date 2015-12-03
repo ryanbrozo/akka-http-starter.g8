@@ -27,25 +27,25 @@ class TestServiceSpec
   override implicit val executor = system.dispatcher
 
   "TestService" should "return a list of top items for /test/top" in {
-    Get(s"/brand/top/0/6") ~> routes ~> check {
+    Get(s"/test/top/0/6") ~> routes ~> check {
       responseAs[List[TestView]] should be(topItemsView)
     }
   }
 
   it should "return a list of top items honoring the start and limit parameter for /test/top" in {
-    Get(s"/brand/top/1/2") ~> routes ~> check {
+    Get(s"/test/top/1/2") ~> routes ~> check {
       responseAs[List[TestView]] should be(topItemsViewTail)
     }
   }
 
   it should "reject with NoSuchItemAppError for an invalid id for /test/<id>" in {
-    Get(s"/test/${generateId.toUrlSafeBase64}") ~> routes ~> check {
+    Get(s"/test/\${generateId.toUrlSafeBase64}") ~> routes ~> check {
       rejection should be(AppRejection(NoSuchItemAppError))
     }
   }
 
   it should "return a 404 for an invalid id for /test/<id>" in {
-    Get(s"/brand/${generateId.toUrlSafeBase64}") ~> Route.seal(routes) ~> check {
+    Get(s"/test/\${generateId.toUrlSafeBase64}") ~> Route.seal(routes) ~> check {
       status should be(StatusCodes.NotFound)
       responseAs[AppException] should be(noSuchItemException)
     }

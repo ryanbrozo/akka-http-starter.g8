@@ -19,11 +19,11 @@ class TestActor(val testMapper: TestDataMapper) extends Actor with TestOperation
   import TestActor._
 
   def receive = {
-    case GetTopFollowers(start, limit) =>
+    case GetTop(start, limit) =>
       sender ! testMapper.getTop(start, limit)
 
     case Get(id) =>
-      testMapper.findOne(userId) match {
+      testMapper.findOne(id) match {
         case Some(f) =>
           sender ! f
         case None =>

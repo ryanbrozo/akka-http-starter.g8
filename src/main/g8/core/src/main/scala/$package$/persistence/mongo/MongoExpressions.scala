@@ -21,9 +21,9 @@ trait SortExpressions {
 
   def Descending: SortOrderType = -1
 
-  def naturalOrderingAscending = MongoDBObject("$natural" -> Ascending)
+  def naturalOrderingAscending = MongoDBObject("\$natural" -> Ascending)
 
-  def naturalOrderingDescending = MongoDBObject("$natural" -> Descending)
+  def naturalOrderingDescending = MongoDBObject("\$natural" -> Descending)
 
   def nameSort(sort: SortOrderType) = MongoDBObject("name" -> sort)
 }

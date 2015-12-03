@@ -9,7 +9,7 @@ trait Config {
 
   lazy protected val conf = ConfigFactory.load()
 
-  def key(name: String) = s"$keyRoot.$name"
+  def key(name: String) = s"\$keyRoot.\$name"
 
 }
 

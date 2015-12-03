@@ -22,7 +22,7 @@ class Json4sSerializersSpec extends FlatSpec with Matchers {
     val testClass = UUIDTest(value)
 
     write(testClass) should be(
-      s"""{"test":"${value.toUrlSafeBase64}"}"""
+      s"""{"test":"\${value.toUrlSafeBase64}"}"""
     )
   }
 
@@ -31,7 +31,7 @@ class Json4sSerializersSpec extends FlatSpec with Matchers {
     val testClass = DateTimeTest(value)
 
     write(testClass) should be(
-      s"""{"test":"${value.toISO8601String}"}"""
+      s"""{"test":"\${value.toISO8601String}"}"""
     )
   }
 }
